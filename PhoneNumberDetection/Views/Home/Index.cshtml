@@ -1,0 +1,31 @@
+﻿@model string
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<h1>Phone Number Detection</h1>
+
+<form method="post" asp-action="CheckPhoneNumber">
+    <div class="form-group">
+        <label for="inputText">Enter your text:</label>
+        <textarea class="form-control" id="inputText" name="inputText" rows="4"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+@if (ViewBag.Message != null)
+{
+    <div class="alert alert-success" role="alert">
+        @ViewBag.Message
+    </div>
+}
+
+@if (ViewData.ModelState.ErrorCount > 0)
+{
+    <div class="alert alert-danger" role="alert">
+        @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+        {
+            <p>@error.ErrorMessage</p>
+        }
+    </div>
+}
